@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { Briefcase, FileText, CheckCircle2 } from "lucide-react";
 
 export default async function DashboardPage() {
-  const { userId } = auth();
+  const { userId } = await auth();
 
   if (!userId) {
     redirect("/sign-in");

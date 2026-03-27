@@ -1,14 +1,14 @@
-import { fetchRemoteJobs } from "@/lib/jobs";
+import { fetchRemoteJobs, type Job } from "@/lib/jobs";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import { auth } from "@clerk/nextjs/server";
 
 export default async function JobsPage({ searchParams }: { searchParams: { q?: string } }) {
-  const { userId } = auth();
+  const { userId } = await auth();
   const query = searchParams.q || "technical support";
   
-  let jobs = [];
+  let jobs: Job[] = [];
   try {
     jobs = await fetchRemoteJobs(query, 30);
   } catch (err) {
@@ -37,7 +37,7 @@ export default async function JobsPage({ searchParams }: { searchParams: { q?: s
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {jobs.map((job: any) => (
+        {jobs.map((job: Job) => (
           <div key={job.id} className="bg-white p-5 border rounded-xl hover:shadow-md transition-shadow flex flex-col">
             <h3 className="font-semibold text-lg line-clamp-2" dangerouslySetInnerHTML={{ __html: job.title }} />
             <p className="text-blue-600 font-medium text-sm mt-1">{job.company_name}</p>
@@ -80,7 +80,7 @@ export default async function JobsPage({ searchParams }: { searchParams: { q?: s
 
       {jobs.length === 0 && (
         <div className="text-center py-12 text-gray-500">
-          No jobs found for "{query}". Try a different search term.
+          No jobs found for &quot;{query}&quot;. Try a different search term.
         </div>
       )}
     </div>

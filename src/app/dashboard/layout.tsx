@@ -34,7 +34,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         {/* Header */}
         <header className="h-16 bg-white border-b flex items-center justify-between px-6">
           <h2 className="text-lg font-semibold text-gray-800">Job Hunt Dashboard</h2>
-          <UserButton afterSignOutUrl="/" />
+          <UserButton />
         </header>
 
         {/* Page Content */}

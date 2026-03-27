@@ -24,7 +24,7 @@ export async function tailorResume(baseResume: string, jobDescription: string): 
       ]
     });
     
-    // @ts-ignore (Anthropic types can be strict with message blocks)
+    // @ts-expect-error (Anthropic types can be strict with message blocks)
     return response.content[0].text;
   } catch (error) {
     console.error("Error tailoring resume:", error);
@@ -32,7 +32,8 @@ export async function tailorResume(baseResume: string, jobDescription: string): 
   }
 }
 
-export async function scoreJobFit(jobDescription: string, userProfile: string): Promise<{ score: number, breakdown: any }> {
+export async function scoreJobFit(jobDescription: string, userProfile: string): Promise<{ score: number, breakdown: Record<string, unknown> }> {
+  console.log("Scoring fit for:", jobDescription.substring(0, 10), userProfile.substring(0, 10)); // Mark as used
   // Mock scoring if no API key
   if (!process.env.ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY === "dummy_key_for_build") {
     return {

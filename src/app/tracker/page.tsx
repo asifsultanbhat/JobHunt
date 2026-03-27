@@ -16,7 +16,7 @@ export default function TrackerPage() {
 
       <div className="flex-1 flex gap-4 overflow-x-auto pb-4">
         {columns.map((col) => (
-          <div key={col.title} className={\`\${col.color} w-80 shrink-0 rounded-xl p-4 flex flex-col border border-border/50\`}>
+          <div key={col.title} className={`${col.color} w-80 shrink-0 rounded-xl p-4 flex flex-col border border-border/50`}>
             <div className="flex justify-between items-center mb-4">
               <h3 className="font-semibold text-gray-800">{col.title}</h3>
               <span className="bg-white text-xs font-bold px-2 py-1 rounded-full text-gray-500 shadow-sm border">
