@@ -16,8 +16,9 @@ export async function POST(req: NextRequest) {
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     
-    // Parse the PDF text
-    const parsedPdf = await pdf(buffer);
+    // Parse the PDF text (Handle potential Next.js ES module default export issues)
+    const pdfParseFunc = typeof pdf === "function" ? pdf : pdf.default;
+    const parsedPdf = await pdfParseFunc(buffer);
     const text = parsedPdf.text;
 
     // 1. Analyze resume with Gemini

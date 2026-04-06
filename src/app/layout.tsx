@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" className={cn("font-sans", inter.variable)}>
-        <body className="antialiased">
+        <body className="antialiased mesh-bg min-h-screen">
           {children}
         </body>
       </html>
